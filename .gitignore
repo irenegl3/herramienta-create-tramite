@@ -1,0 +1,5 @@
+/create-tramite/node_modules
+/gestion-tramites/back/node_modules
+/gestion-tramites/front/node_modules
+.DS_Store
+node_modules

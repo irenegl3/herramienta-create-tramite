@@ -1,0 +1,10 @@
+const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config({ path: path.join(__dirname, 'local.env') });
+
+module.exports = {
+  'config': path.resolve('db', 'config.js'),
+  'models-path': path.resolve('models'),
+  'seeders-path': path.resolve('db', 'seeders'),
+  'migrations-path': path.resolve('db', 'migrations')
+};

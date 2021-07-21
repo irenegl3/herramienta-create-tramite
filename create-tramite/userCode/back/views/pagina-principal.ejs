@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de trámites disponibles online</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--BOOTSTRAP 4-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel='stylesheet' type="text/css" href='<%=context%>/stylesheets/index.css' />
+</head>
+
+<body>
+    <div id="buttonMenuPortales123" style="position:fixed; z-index:4; text-align: right"></div>
+    <script src="https://<%=portalName%>.etsit.upm.es/<%=session.portal%>/static-button"></script>
+    <script>
+        let context = '<%-context%>';
+        document.addEventListener('DOMContentLoaded', dibujarmenulateral("buttonMenuPortales123", context + "/logout", '<%=session.user.mailPrincipal%>', '<%=session.user.givenname%>', '<%=pruebasBoolean%>'));
+    </script>
+    <nav class="barraInicio navbar navbar-expand-md navbar-dark">
+        <span class="navbar-brand"><%=barraInicioText%></span>
+    </nav>
+<div class="textoInicio">
+    <div class="alert ">
+        <li>Navegadores compatibles: Google Chrome, Mozilla Firefox, Safari y Microsoft Edge.</li>
+       <li>Navegador recomendado: Google Chrome.</li>
+      </div>
+</div>
+    <div>
+        <p class="textoInicio">
+            
+            En esta página se dispone el acceso a los trámites de secretaría que pueden realizarse de forma online.
+            <br>
+            Para acceder a la normativa de los mismos <a
+                href=" http://www.etsit.upm.es/escuela/secretaria-de-alumnos/tramites-de-secretaria.html">pinche
+                aquí</a>
+            <br>
+        </p>
+    </div>
+
+    <div>
+        <ul class="listaTramites">
+            <%Object.values(tramites).forEach(tramite =>{ %>
+            <a href="<%=context%>/<%=tramite[0]%>/"><b><i>
+                        <li><%=tramite[1]%></li>
+                    </i></b></a>
+            <% }) %>
+        </ul>
+    </div>
+    <div class="textoInicio" id='permisos'>
+    </div>
+    <script>
+        if (context.includes('pas')) {
+            document.getElementById("permisos").innerHTML = "<h5>Gestor de permisos</h5><p>En esta sección usted prodrá gestionar los permisos de cada trámite, añadiendo el email de la persona encargada y el trámite correspondiente.</p><a href='<%=context%>/permisos'><b>Gestionar permisos</b></a>";
+        }
+    </script>
+</body>
+
+</html>

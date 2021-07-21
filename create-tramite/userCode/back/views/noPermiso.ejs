@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Permiso denegado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--BOOTSTRAP 4-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel='stylesheet' type="text/css" href='<%=context%>/stylesheets/index.css' />
+</head>
+
+<body>
+    <div id="buttonMenuPortales123" style="position:fixed; z-index:4; text-align: right"></div>
+    <script src="https://<%=portalName%>.etsit.upm.es/<%=session.portal%>/static-button"></script>
+    <script>
+        let context = '<%-context%>';
+        document.addEventListener('DOMContentLoaded', dibujarmenulateral("buttonMenuPortales123", context + "/logout", '<%=session.user.mailPrincipal%>', '<%=session.user.givenname%>', '<%=pruebasBoolean%>'));
+    </script>
+    <nav class="barraInicio navbar navbar-expand-md navbar-dark">
+        <span class="navbar-brand"><%=barraInicioText%></span>
+    </nav>
+
+    <div class="textoInicio">
+        <h2><%=barraInicioText%></h2>
+        <p><a href="<%=context%>">Volver al listado de trámites</a></p>
+        <p><b>Usted no tiene permiso para gestionar este trámite.</b></p>
+        <p>Si cree que debería tener permiso, contacte con la persona encargada de secretaría.</p>
+    </div>
+</body>
+
+</html>

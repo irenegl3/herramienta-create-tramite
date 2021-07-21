@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de permisos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--BOOTSTRAP 4-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel='stylesheet' type="text/css" href='<%=context%>/stylesheets/index.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div id="buttonMenuPortales123" style="position:fixed; z-index:4; text-align: right"></div>
+    <script src="https://<%=portalName%>.etsit.upm.es/<%=session.portal%>/static-button"></script>
+    <script src="<%=context%>/js/paginator.js"></script>
+    <script>
+        let context = '<%-context%>';
+        document.addEventListener('DOMContentLoaded', dibujarmenulateral("buttonMenuPortales123", context + "/logout", '<%=session.user.mailPrincipal%>', '<%=session.user.givenname%>', '<%=pruebasBoolean%>'));
+    </script>
+    <nav class="barraInicio navbar navbar-expand-md navbar-dark">
+        <span class="navbar-brand">
+            <%=barraInicioText%>
+        </span>
+    </nav>
+
+    <div class="textoInicio">
+
+        <h3>
+            <%=barraInicioText%>
+        </h3>
+        <p><a href="<%=context%>">Volver al listado de trámites</a></p>
+
+        <div class="seccion">
+            <h5>Actualizar administrador</h5>
+            <p>Actual administrador: <%=admin%></p>
+            <p>Si desea actualizar el email del rol de administrador, introduzca en el siguiente espacio el email
+                deseado.</p>
+            <form action="<%-context%>/updateAdmin" method="post" onsubmit="return validador_update()">
+                <div class="form-group">
+                    <div class="row row-p">
+                        <label for="email_2"><b>Email: </b></label>
+                        <input type="email" class="form-control col-4 space" name="email_2"
+                            placeholder="ejemplo@upm.es">
+                        <button type="submit" class="btn btn-primary space">Actualizar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <br>
+
+        <div class="seccion">
+            <h5>Dar de alta un nuevo permiso</h5>
+            <p>Rellene el siguiente formulario con el email de la persona en cuestión y el trámite correspondiente.
+            <form action="<%-context%>/createPermiso" method="POST" onsubmit="return validador_create()">
+                <div class="form-group">
+                    <div class="row row-p">
+                        <label for="email_1"><b>Email:</b></label>
+                        <input type="email" class="form-control col-3 space" name="email_1"
+                            placeholder="ejemplo@upm.es">
+                    <!-- </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="row row-p"> -->
+                            <label for="tramite" class="space"><b>Trámite:</b></label>
+                            <select class="form-control col-2 space" name="tramite">
+                                <%Object.values(tramites).forEach(tramite=>{ %>
+                                    <option>
+                                        <%=tramite[0]%>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                            <button type="submit" class="btn btn-primary space">Crear permiso</button>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <br>
+        
+        <div>
+            <h5>Permisos activos</h5>
+
+            <table id="table" class="table hover">
+                <tr>
+                    <th>Email
+                        <input id="searchBox" class='form-control' placeholder="ejemplo@upm.es" onkeyup="filterEmail()">
+                    </th>
+                    <th>Trámite
+                        <select id="listaTramites" onchange="filterTramites()" class='form-control'>
+                            <option>Todos</option>
+                            <%Object.values(tramites).forEach(tramite=>{ %>
+                                <option>
+                                    <%=tramite[0]%>
+                                </option>
+                                <% }) %>
+                        </select>
+                    </th>
+                    <th>Acción</th>
+                    <%Object.values(session.permisos).forEach(permiso=>{ %>
+                <tr>
+                    <td>
+                        <%=permiso["email"]%>
+                    </td>
+                    <td>
+                        <%=permiso["tramite"]%>
+                    </td>
+                    <td>
+                        <form action="<%-context%>/deletePermiso" method="POST"
+                            onsubmit="return confirm('¿Está seguro de querer eliminar este permiso?');">
+                            <input type="email" class="form-control" hidden="true" name="email"
+                                value="<%=permiso['email']%>">
+                            <input type="text" class="form-control" hidden="true" name="tramite"
+                                value="<%=permiso['tramite']%>">
+                            <button class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+                    </tr>
+
+            </table>
+            <div id="box"></div>
+            <br>
+
+        </div>
+    </div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>
+                    <%=barraInicioText%>
+                </h2>
+            </div>
+            <div class="modal-body">
+                <p id='mensaje'></p>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    paginator({
+        table: document.getElementById("table"),
+        rows_per_page: 10,
+        box: document.getElementById("box"),
+        active_class: "color_page",
+        box_mode: "list",
+        page_options: false
+    });
+
+    function filterTramites() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("listaTramites");
+        filter = input.value;
+        table = document.getElementById("table");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                if (filter == "Todos") {
+                    tr[i].style.display = "";
+                }
+                else if (td.innerHTML.indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function filterEmail() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("searchBox");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("table");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                if (td.innerHTML.toUpperCase().includes(filter)) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function validador_create() {
+        var email = document.getElementsByName("email_1")[0].value;
+        if (email == undefined || email == null || email == "") {
+            alert('Debe rellenar el campo email.');
+            return false;
+        } else {
+            confirm('¿Está seguro de querer crear un nuevo permiso?');
+        }
+    }
+
+    function validador_update() {
+        var email = document.getElementsByName("email_2")[0].value;
+        if (email == undefined || email == null || email == "") {
+            alert('Debe rellenar el campo email.');
+            return false;
+        } else {
+            confirm('¿Está seguro de querer actualizar el administrador?');
+        }
+    }
+
+
+    var showConfirmacion = "<%= showConfirmacion %>";
+    var mensaje = "<%= mensaje %>";
+    var modal = document.getElementById("myModal");
+
+    if (showConfirmacion == "true") {
+        document.getElementById('mensaje').innerHTML = mensaje;
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal
+        modal.style.display = "block";
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+            window.location.href = "<%= context %>/permisos";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                window.location.href = "<%= context %>/permisos";
+            }
+        }
+    } else {
+        modal.style.display = "none";
+    }
+
+</script>
+
+</html>

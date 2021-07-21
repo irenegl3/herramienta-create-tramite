@@ -1,0 +1,175 @@
+.barraInicio {
+  background-color: #4564a3 !important;
+  width: 100%;
+  color: white !important;
+  border-radius: 0px;
+  border-style: solid;
+  border-top-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 1px;
+}
+
+/*sobrescribir la clase del menú lateral*/
+.sidenav-2-d9f2c5a7e3da2e5fa5423cc19ea5a8b5 a {
+  color: #FFFFFF !important;
+}
+/*sobrescribir la clase del botón del menú lateral*/
+.open-6659b527b8d152af596e174303b316a7 {
+  position: fixed !important;
+  color: #FFFFFF;
+}
+
+.textoInicio{
+  position: relative;
+  padding-left: 70px;
+  padding-right: 70px;
+  top: 20px;
+}
+
+.listaTramites{
+  position: relative;
+  padding-left: 100px;
+  top: 20px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  
+  /* width: 100%; */
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+div.paginate{
+  padding: 5px 0px;
+  margin: auto;
+}
+
+div.paginate input[type='button']:hover{
+  cursor: pointer;
+}
+
+div.paginate input[type='button']{
+  margin: 0px 2px;
+  border: none;
+  color: black;
+  background-color: transparent;
+  border-radius: 50%;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  outline: none;
+}
+
+div.paginate input[type='button'].active{
+  background-color: grey;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+   padding: 1rem 1rem;
+  display:block
+}
+
+.modal-body {padding: 1rem}
+
+/* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: #d1ecf1; /* Red */
+  color:#0c5460;
+  border-color: #bee5eb;
+  margin-bottom: 15px;
+}
+
+.color_page {
+  font-weight: bold;
+}
+
+.pagination>li>a {
+  padding: 6px 9px;
+  color: #337ab7;
+  border: 0.3px solid #ddd;
+}
+
+.row-p {
+  margin-left: 0px;
+}
+
+.space {
+  margin-left: 10px;
+}
+
+.seccion {
+  border:#888 solid 1px;
+  border-radius: 20px 20px 20px 20px;
+  padding:15px;
+}
+
+label {
+  margin-top:auto;
+}

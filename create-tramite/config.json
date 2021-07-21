@@ -1,0 +1,122 @@
+{
+    "nombreTramite": "Tramite_1",
+    "estado": "prod",
+    "descripcionTramite": "Solicitud tramite 1",
+    "baseDatos": {
+        "tablas": [
+            {
+                "nombreTabla": "PeticionTramite_1",
+                "columnas": [
+                    {
+                        "nombreColumna": "edupersonuniqueid",
+                        "tipo": "string"
+                    },
+                    {
+                        "nombreColumna": "nombre",
+                        "tipo": "string"
+                    },
+                    {
+                        "nombreColumna": "apellido",
+                        "tipo": "string"
+                    },
+                    {
+                        "nombreColumna": "email",
+                        "tipo": "string"
+                    },
+                    {
+                        "nombreColumna": "planCodigo",
+                        "tipo": "string"
+                    },
+                    {
+                        "nombreColumna": "planNombre",
+                        "tipo": "string"
+                    },
+                    {
+                        "nombreColumna": "estadoPeticion",
+                        "tipo": "integer"
+                    },
+                    {
+                        "nombreColumna": "fecha",
+                        "tipo": "dateonly"
+                    },
+                    {
+                        "nombreColumna": "textCancel",
+                        "tipo": "text"
+                    }
+                ]
+            }
+        ]
+    },
+    "estadosTramite": [
+        {
+            "id": 1,
+            "estadoTexto": "PEDIDO",
+            "textoEmailToPas": "textoEmail",
+            "textoEmailToAlumno": "textoEmail",
+            "btnForPas": true,
+            "btnForEstudiantes": false,
+            "inicial": true,
+            "final": false,
+            "cancelable": true,
+            "nombreBoton": "Avanzar",
+            "descripcionModal": "Va a pasar la solicitud al siguiente estado",
+            "salidas": [
+                2
+            ]
+        },
+        {
+            "id": 2,
+            "estadoTexto": "ESPERA_PAGO",
+            "textoEmail": "textoEmail",
+            "btnForPas": false,
+            "btnForEstudiantes": true,
+            "inicial": false,
+            "final": false,
+            "cancelable": true,
+            "nombreBoton": "Pago realizado",
+            "descripcionModal": "Usted va a confirmar que ha realizado el pago del tramite",
+            "salidas": [
+                3
+            ]
+        },
+        {
+            "id": 3,
+            "estadoTexto": "PAGO_CONFIRMADO",
+            "textoEmail": "textoEmail",
+            "btnForPas": true,
+            "btnForEstudiantes": false,
+            "inicial": false,
+            "final": false,
+            "cancelable": false,
+            "nombreBoton": "Pago recibido",
+            "descripcionModal": "Usted va a confirmar que el alumno ha realizado el pago del tramite solicitado",
+            "salidas": [
+                4
+            ]
+        },
+        {
+            "id": 4,
+            "estadoTexto": "FINALIZADO",
+            "textoEmail": "textoEmail",
+            "btnForPas": false,
+            "btnForEstudiantes": false,
+            "inicial": false,
+            "final": true,
+            "cancelable": false,
+            "descripcionModal": "",
+            "salidas": null
+        },
+        {
+            "id": -1,
+            "estadoTexto": "CANCELADO",
+            "textoEmail": "textoEmail",
+            "btnForPas": false,
+            "btnForEstudiantes": false,
+            "inicial": false,
+            "final": true,
+            "cancelable": false,
+            "descripcionModal": "",
+            "salidas": null
+        }
+    ]
+}
