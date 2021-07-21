@@ -1,6 +1,6 @@
 {
   "name": "create-tramite",
-  "version": "1.1.2",
+  "version": "1.0.0",
   "description": "Herramienta de automatizacion para la creacion de tramites de la ETSIT",
   "main": "main.js",
   "scripts": {
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/irenegl3/create-tramite.git"
+    "url": "git+https://github.com/irenegl3/herramienta-create-tramite.git"
   },
   "author": "Irene Garcia",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/irenegl3/create-tramite/issues"
+    "url": "https://github.com/irenegl3/herramienta-create-tramite/issues"
   },
-  "homepage": "https://github.com/irenegl3/create-tramite#readme",
+  "homepage": "https://github.com/irenegl3/herramienta-create-tramite#readme",
   "dependencies": {
     "chalk": "4.1.0",
     "cross-spawn": "7.0.3",
